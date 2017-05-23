@@ -4,7 +4,7 @@ package InventoryTracking;
  * to create non-fiction and fiction objects of type movie and book.
  * by Nalinie Nybo
  * Assignment 2 - MET CS 665
- */
+ */ 
 
 //child class of Movie
 public class NonFictionMovie extends Movie{

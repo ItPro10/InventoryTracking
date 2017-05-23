@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
  * This is console demo to show the use of the abstract factory pattern 
  * to create non-fiction and fiction objects of type movie and book.
  * by Nalinie Nybo
- * Assignment 2 - MET CS 665
+ * Assignment 2 - MET CS 665  
  */
 
 /*
