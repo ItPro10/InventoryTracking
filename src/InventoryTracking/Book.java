@@ -51,7 +51,7 @@ public abstract class Book {
 	//display book info
 	public String getBookDetails()
 	{
-		return "Book: \n Book Title: " + getBookTitle() + "\n Author: " + getAuthor();
+		return "Book: \n Book Title: " + getBookTitle() + "\n Author: " + getAuthor() + "\nPublisher: " + getPublisher();
 	}
 
 	//override toString method

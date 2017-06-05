@@ -23,7 +23,7 @@ public class FictionBook extends Book{
 	@Override
 	public String getBookDetails()
 	{
-		return "Fiction Book: \n Book Title: " + getBookTitle() + "\n Author: " + getAuthor();
+		return "Fiction Book: \n Book Title: " + getBookTitle() + "\n Author: " + getAuthor() + "\n Publisher: " + getPublisher();
 	}
 
 	//override toString method
