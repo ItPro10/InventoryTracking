@@ -8,6 +8,7 @@ This is console demo to show the use of several design patterns such as:
 6. Command.
 
 By Nalinie Nybo. 
+
 Assignment 6 - MET CS 665.  
 06/17/2017.
  
@@ -20,6 +21,6 @@ Assignment 6 - MET CS 665.
 6. User can select C to see a demo of viewing an organization chart.
 7. User can select D to see a demo of the data access. 
 
-Additional Info. 
+Additional Info:
 Application separated into different packages. 
 Demo class can be found in the InventoryTracking/InventoryDemo.java class.
