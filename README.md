@@ -1,8 +1,15 @@
 # InventoryTracking
-This is console demo to show the use of several design patterns such as Abstract Factory, Singleton, Composite, Iterator,Observer and Command.
- by Nalinie Nybo. 
- Assignment 6 - MET CS 665.  
- 06/17/2017.
+This is console demo to show the use of several design patterns such as:
+1. Abstract Factory.
+2. Singleton. 
+3. Composite.
+4. Iterator.
+5. Observer. 
+6. Command.
+
+By Nalinie Nybo. 
+Assignment 6 - MET CS 665.  
+06/17/2017.
  
  PROMPTS - Week 6
 1. User can select A to see a demo of adding an item.
@@ -14,4 +21,5 @@ This is console demo to show the use of several design patterns such as Abstract
 7. User can select D to see a demo of the data access. 
 
 Additional Info. 
-Application separated into different packages. Demo class can be found in the InventoryTracking/InventoryDemo.java class.
+Application separated into different packages. 
+Demo class can be found in the InventoryTracking/InventoryDemo.java class.
