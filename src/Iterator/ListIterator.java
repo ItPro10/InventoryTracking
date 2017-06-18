@@ -5,7 +5,7 @@ package Iterator;
  * Assignment 4 - MET CS 665 
  */
 //base class for iterator
-public interface ParentIterator {
+public interface ListIterator {
 	//has next
 	public boolean hasNext();
 	//next

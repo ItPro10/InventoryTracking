@@ -7,23 +7,32 @@ import javax.swing.JOptionPane;
 import Command.BookOrder;
 import Command.InventoryOrders;
 import Command.OrderAgent;
+import CompositePattern.Associate;
+import CompositePattern.Supervisor;
 import Iterator.FictionBookList;
-import Iterator.ParentIterator;
+import Iterator.ListIterator;
 import Observer.Music;
 import Observer.StoreRoomObserver;
+import Singleton.DataAccess;
 
 /*
- * This is console demo to show the use of the Iterator, Observer and Command pattern 
+ * This is console demo to show the use of several design patterns 
+ * such as Abstract Factory, Singleton, Composite, Iterator,
+ * Observer and Command.
  * by Nalinie Nybo
- * Assignment 4 - MET CS 665 
- * 06/05/2017
+ * Assignment 6 - MET CS 665 
+ * 06/17/2017
  */
 /*
- * PROMPTS - Week 4
+ * PROMPTS - Week 6
  * This class prompts the user for input
- * 1. User can select I to see a demo of the Iterator Pattern
- * 2. User can select O to see a demo of the Observer Pattern
- * 3. User can select C to see a demo of the Command Pattern
+ * 1. User can select A to see a demo of adding an item
+ * 2. User can select E to see a demo of editing an item
+ * 3. User can select V to see a demo of viewing a list of items
+ * 4. User can select O to see a demo of ordering an item
+ * 5. User can select L to see a demo of viewing low inventory levels
+ * 6. User can select C to see a demo of viewing an organization chart
+ * 7. User can select D to see a demo of the data access 
  */
 
 //OLDER WEEK 2
@@ -65,84 +74,165 @@ import Observer.StoreRoomObserver;
 public class InventoryDemo {
 
 	public static void main(String[] args) {
-		String input = JOptionPane.showInputDialog("Enter I for Iterator Demo, O for Observer Demo , or C for Command Demo: ");
+		//get which demo to perform
+		String input = JOptionPane.showInputDialog("Enter A to add an inventory item, E to edit an inventory item , V to view a list of items, O to order an item, L for low levels, C to see an org chart, D to see a data access demo: ");
+
 		//create books using abstract factory pattern
-				//declare concrete factory of type abstract factory (parent class)
-				AbstractFactoryStoreInventory fictionFactory = null;
-				
-				//using the InventorySetup class to initialize
-				//and return the concrete FICTION factory object
-				fictionFactory = InventorySetup.getConcreteFactory("FICTION");
-				
-					//create an object of Book Fiction
-					//using factory
-					Book fictionBook = fictionFactory.createBook("FICTION");
-					//hard code book info using setters
-					fictionBook.setBookTitle("Harry Potter");
-					fictionBook.setAuthor("JK Rowling");
-					fictionBook.setPublisher("Random House");
-		if(input.equalsIgnoreCase("I"))
-		{
+		//declare concrete factory of type abstract factory (parent class)
+		AbstractFactoryStoreInventory fictionFactory = null;
+
+		//using the InventorySetup class to initialize
+		//and return the concrete FICTION factory object
+		fictionFactory = InventorySetup.getConcreteFactory("FICTION");
 		
-			
+		//create an object of Book Fiction
+		//using factory
+		Book fictionBook = fictionFactory.createBook("FICTION");
+		
+		//***********ADD AN ITEM**************
+		if(input.equalsIgnoreCase("A"))
+		{
+			//prompt for more input
+			String type = JOptionPane.showInputDialog("Enter inventory type: ");
+			String name = JOptionPane.showInputDialog("Enter name of book: ");
+			String author = JOptionPane.showInputDialog("Enter author of book: ");
+			String publisher = JOptionPane.showInputDialog("Enter publisher of book: ");
+			String quantity = JOptionPane.showInputDialog("Enter quantity of book: ");
+			//set book info using setters
+			fictionBook.setBookTitle(name);
+			fictionBook.setAuthor(author);
+			fictionBook.setPublisher(publisher);
+			fictionBook.SetQuantity(Integer.parseInt(quantity));
+			System.out.println("Demo showing adding a fiction book item.\nThe Abstract Factory pattern is being used to create the object.");
+			System.out.println(fictionBook);
+		}
+		//**********EDIT AN ITEM**************
+		else if(input.equalsIgnoreCase("E"))
+		{
+			//prompt for value to update quantity
+			String input2 = JOptionPane.showInputDialog("Enter new quantity value to update item to: ");
+			System.out.println("Original item values: ");
+			Book product = new FictionBook();
+			product.setBookTitle("The Hobbit");
+			product.setAuthor("JRR Tolkien");
+			product.setPublisher("Houghton Mifflin");
+			product.SetQuantity(50);
+			System.out.println(product);
+		    product.SetQuantity(Integer.parseInt(input2));
+		    System.out.println("Updating.... ");
+			System.out.println("New item values: ");
+			System.out.println(product); 
+		}
+		//*********VIEW LIST**************
+		else if(input.equalsIgnoreCase("V"))
+		{
+			Book fictionBook1 = fictionFactory.createBook("FICTION");
+			//hard code book info using setters
+			fictionBook1.setBookTitle("The Man in the Brown Suit");
+			fictionBook1.setAuthor("Agatha Christie");
+			fictionBook1.setPublisher("Penguin");
+			fictionBook1.SetQuantity(45);
 			
 			Book fictionBook2 = fictionFactory.createBook("FICTION");
 			//hard code book info using setters
 			fictionBook2.setBookTitle("Murder on the Orient Express");
 			fictionBook2.setAuthor("Agatha Christie");
 			fictionBook2.setPublisher("Penguin");
-			
+			fictionBook2.SetQuantity(55);
+
 			Book fictionBook3 = fictionFactory.createBook("FICTION");
 			//hard code book info using setters
 			fictionBook3.setBookTitle("The Hobbit");
 			fictionBook3.setAuthor("JRR Tolkien");
 			fictionBook3.setPublisher("Houghton Mifflin Company");
-			
+			fictionBook3.SetQuantity(50);
+
 			Book fictionBook4 = fictionFactory.createBook("FICTION");
 			//hard code book info using setters
 			fictionBook4.setBookTitle("The Lord of the Rings Trilogy");
 			fictionBook4.setAuthor("JRR Tolkien");
 			fictionBook4.setPublisher("Houghton Mifflin Company");
-			
+			fictionBook4.SetQuantity(80);
+
 			//create book list
 			//add books to list
 			List<Book> books = new ArrayList<Book>();
-			books.add(fictionBook);
+			books.add(fictionBook1);
 			books.add(fictionBook2);
 			books.add(fictionBook3);
 			books.add(fictionBook4);
-			
+
 			//create FictionBooklist from iterator package
 			FictionBookList bookRepository = new FictionBookList(books);
 			//use iterator design pattern to iterate through booklist
 			//print name of books and details
 			System.out.println("Iterator Demo showing a list of books.\nThe Iterator Design pattern is being used to iterate through the list.");
 			System.out.println("Fiction Book list: ");
-			for(ParentIterator iter = bookRepository.getIterator(); iter.hasNext();){
-		         Book name = (Book)iter.next();
-		         System.out.println(" Title : " + name.getBookTitle() + ", Author: " + name.getAuthor() + ", Publisher: " + name.getPublisher());
-		      } 
+			for(ListIterator iter = bookRepository.getIterator(); iter.hasNext();){
+				Book name = (Book)iter.next();
+				System.out.println(" Title : " + name.getBookTitle() + ", Author: " + name.getAuthor() + ", Publisher: " + name.getPublisher() + ", Quantity: " + name.getQuantity());
+			} 
 		}
-		//************OBSERVER PATTERN**********
-		else if (input.equalsIgnoreCase("O"))
+
+		//************OBSERVER PATTERN - LOW INVENTORY**********
+		else if (input.equalsIgnoreCase("L"))
 		{
 			System.out.println("Observer Design Pattern Demo\nUsed to warn when inventory is low");
-			 Music music = new Music("Fleetwood Mac", "Rock");
-				StoreRoomObserver store = new StoreRoomObserver(music);
-				music.setLowStock(true);
+			Music music = new Music("Fleetwood Mac", "Rock");
+			StoreRoomObserver store = new StoreRoomObserver(music);
+			music.setLowStock(true);
 		}
-		//**********COMMAND PATTERN**************
-		else if(input.equalsIgnoreCase("C"))
+		//**********COMMAND PATTERN - ORDER ITEMS**************
+		else if(input.equalsIgnoreCase("O"))
 		{
 			System.out.println("Command Design Pattern Demo\nUsed to order inventory");
-				InventoryOrders inOrder = new InventoryOrders(fictionBook);
-				BookOrder bookOrder = new BookOrder(inOrder);
-				OrderAgent orderAgent = new OrderAgent();
-				orderAgent.takeOrder(bookOrder);
-				orderAgent.placeOrders();
+			fictionBook.setBookTitle("Murder on the Orient Express");
+			fictionBook.setAuthor("Agatha Christie");
+			fictionBook.setPublisher("Penguin");
+			fictionBook.SetQuantity(55);
+			InventoryOrders inOrder = new InventoryOrders(fictionBook);
+			BookOrder bookOrder = new BookOrder(inOrder);
+			OrderAgent orderAgent = new OrderAgent();
+			orderAgent.takeOrder(bookOrder);
+			orderAgent.placeOrders();
 		}
-		
-		
+		//**********COMPOSITE PATTERN - VIEW ORG CHART**************
+		else if(input.equalsIgnoreCase("C"))
+		{
+			System.out.println("Composite Design Pattern Demo\nUsed to view an organization chart");
+			Associate tom = new Associate("Tom Thompson", "Associate");
+			Associate john =  new Associate("John Smith", "Associate");
+			Associate tim =  new Associate("Tim Tucker", "Associate");
+			Supervisor jim = new Supervisor("James Kirk", "Supervisor");
+			jim.add(tom);
+			jim.add(john);
+			jim.add(tim);
+			jim.getDetails();
+		}
+		//**********SINGLETON PATTERN - DATA ACCESS**************
+		else if(input.equalsIgnoreCase("D"))
+		{
+			// Singleton Pattern for data access
+			//get instance
+			DataAccess das = DataAccess.getInstance();
+			//call methods
+			//retrieve data
+			das.getBookData();
+			das.getMovieData();
+			//insert data
+			Book fictionBook3 = fictionFactory.createBook("FICTION");
+			//hard code book info using setters
+			fictionBook3.setBookTitle("The Hobbit");
+			fictionBook3.setAuthor("JRR Tolkien");
+			fictionBook3.setPublisher("Houghton Mifflin Company");
+			fictionBook3.SetQuantity(50);
+			das.addBookData(fictionBook3);
+			das.addMovieData("Star Trek", "William Shatner");
+			//edit data
+			das.editBookData("Harry Potter", "JK Rowling", 30);
+			das.editMovieData("Star Wars", "George Lucas", 15);
+		}
+
 		
 		
 		

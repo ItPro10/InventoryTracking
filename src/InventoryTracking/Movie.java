@@ -27,7 +27,6 @@ public abstract class Movie {
 		this.director = direct;
 	}
 
-
 	//get methods
 	public String getMovieTitle()
 	{

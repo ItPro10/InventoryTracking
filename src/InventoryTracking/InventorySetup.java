@@ -18,9 +18,7 @@ public class InventorySetup {
 		}else if(choice.equalsIgnoreCase("NONFICTION")){
 			return new NonFictionFactory();
 		}
-
 		return null;
-
 	}
 
 }

@@ -16,18 +16,20 @@ public class NonFictionBook extends Book {
 
 
 
+	
+
 	//display book info
-	@Override
-	public String getBookDetails()
-	{
-		return "Non-Fiction Book: \n Book Title: " + getBookTitle() + "\n Author: " + getAuthor();
-	}
+		@Override
+		public String getBookDetails()
+		{
+			return "Non-Fiction Book: \n Book Title: " + getBookTitle() + "\n Author: " + getAuthor() + "\n Publisher: " + getPublisher() + "\nQuantity: " + getQuantity();
+		}
 
-	//override toString method
-	public String toString()
-	{
+		//override toString method
+		public String toString()
+		{
 
-		return getBookDetails();
+			return getBookDetails();
 
-	}
+		}
 }

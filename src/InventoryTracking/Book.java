@@ -12,6 +12,7 @@ public abstract class Book {
 	private String bookTitle;
 	private String author;
 	private String publisher;
+	public int quantity;
 
 	//constructor
 	public Book()
@@ -32,7 +33,10 @@ public abstract class Book {
 	{
 		this.publisher = publish;
 	}
-
+	public void SetQuantity(int qty)
+	{
+		this.quantity = qty;
+	}
 
 	//get methods
 	public String getBookTitle()
@@ -47,11 +51,13 @@ public abstract class Book {
 	{
 		return this.publisher;
 	}
-
-	//display book info
-	public String getBookDetails()
+	public int getQuantity()
 	{
-		return "Book: \n Book Title: " + getBookTitle() + "\n Author: " + getAuthor() + "\nPublisher: " + getPublisher();
+		return quantity;
+	}
+	//display book info
+	public String getBookDetails() {
+		return "Book: \n Book Title: " + getBookTitle() + "\n Author: " + getAuthor() + "\n Publisher: " + getPublisher() + "\n Quantity: " + getQuantity();
 	}
 
 	//override toString method
@@ -59,4 +65,5 @@ public abstract class Book {
 	{
 		return getBookDetails();
 	}
+	
 }

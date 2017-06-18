@@ -23,12 +23,12 @@ public class FictionBookList implements BookList{
 	}
 	//returns aggregate object
 	@Override
-	public ParentIterator getIterator() {
+	public ListIterator getIterator() {
 		return new BookIterator();
 	}
 
 	//BookIterator class as an aggregate of FictionBookList
-	private class BookIterator implements ParentIterator{
+	private class BookIterator implements ListIterator{
 		//declare variables
 		int index;
 		//has next method

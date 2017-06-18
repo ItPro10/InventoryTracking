@@ -6,5 +6,5 @@ package Iterator;
  */
 //base class for book lists
 public interface BookList {
-public ParentIterator getIterator();
+public ListIterator getIterator();
 }
